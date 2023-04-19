@@ -26,8 +26,8 @@ public struct pxm {
                 fatalError("Failed to read \(i)")
             }
             
-            guard let nsImage = nsImage.resize(CGSize(width: 32,
-                                                      height: 32)) else {
+            guard let nsImage = nsImage.resize(CGSize(width: 16,
+                                                      height: 16)) else {
                 fatalError("Failed to resize \(i)")
             }
             guard let cgImage = nsImage.cgImage(forProposedRect: nil,
@@ -35,7 +35,6 @@ public struct pxm {
                                                 hints: nil) else {
                 fatalError("Failed to convert \(i) from NSImage to CGImage")
             }
-            //let resized = cgImage.resize(size: )
             
             hashes[i] = phash(dct(bitmap: cgImage.gray()))
         }
@@ -52,7 +51,7 @@ public struct pxm {
                     continue
                 }
                 distance = hamming_distance(hashes[i]!, hashes[j]!)
-                if distance < 2 {
+                if distance == 0 {
                     same.append(j)
                 } else if distance < 3 {
                     //similar.append(j)
