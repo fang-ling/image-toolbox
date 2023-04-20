@@ -11,34 +11,33 @@ public struct pxm {
         } catch {
             print(error.localizedDescription)
         }
-        
+
         /* Only hash images */
         files = files.filter({
             $0.lowercased().hasSuffix(".jpg") ||
             $0.lowercased().hasSuffix(".png") ||
             $0.lowercased().hasSuffix(".jpeg")
         })
-        
+
         /* Hash images */
         var hashes : [String : String] = [:]
         for i in files {
-            guard let nsImage = NSImage(contentsOfFile: i) else {
+            guard var nsImage = NSImage(contentsOfFile: i) else {
                 fatalError("Failed to read \(i)")
             }
-            
-            guard let nsImage = nsImage.resize(CGSize(width: 16,
-                                                      height: 16)) else {
-                fatalError("Failed to resize \(i)")
+            if i.lowercased().hasSuffix(".png") {
+                nsImage = png2jpg(png: nsImage)!
             }
-            guard let cgImage = nsImage.cgImage(forProposedRect: nil,
+            guard var cgImage = nsImage.cgImage(forProposedRect: nil,
                                                 context: nil,
                                                 hints: nil) else {
                 fatalError("Failed to convert \(i) from NSImage to CGImage")
             }
-            
-            hashes[i] = phash(dct(bitmap: cgImage.gray()))
+            cgImage = cgImage.resize(width: 32, height: 32)!
+
+            hashes[i] = phash(dct(matrix: cgImage.gray()!, block_size: 32))
         }
-        
+
         /* Compare */
         var same = [String]()
         var similar = [String]()
@@ -54,17 +53,19 @@ public struct pxm {
                 if distance == 0 {
                     same.append(j)
                 } else if distance < 3 {
-                    similar.append(j)
+//                    similar.append(j)
                 }
             }
             if (same.isEmpty && similar.isEmpty) {
                 continue
             }
-            print("""
-                  Image: \(i)
-                  The same images: \(same)
-                  Similar images: \(similar)
-                  """)
+            print("open \(i)", terminator: "")
+            for j in same {
+                print(" \(j)", terminator: "")
+            }
+            print()
+                  //Similar images: \(similar)
+                  /*"""*/
         }
     }
 }

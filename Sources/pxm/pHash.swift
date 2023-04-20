@@ -9,13 +9,13 @@ import Foundation
 
 let HASH_LENGTH = 8 /// 8 * 8 = 64
 
-func phash(_ tr : [[Double]]) -> String {
+func phash(_ tr : Matrix) -> String {
     var hash = ""
     var average = 0.0
     var subarray = [[Double]](repeating: [Double](), count: HASH_LENGTH)
     for i in 0 ..< HASH_LENGTH {
         for j in 0 ..< HASH_LENGTH {
-            subarray[i].append(tr[i][j])
+            subarray[i].append(tr[i, j])
             average += subarray[i][j]
         }
     }
