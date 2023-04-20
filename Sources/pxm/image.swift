@@ -9,6 +9,40 @@ import Foundation
 import CoreGraphics
 import AppKit
 
+func png2jpg(png : NSImage) -> NSImage? {
+    let cgi = png.cgImage(forProposedRect: nil,
+                          context: nil,
+                          hints: nil)!
+    let bitmapRep = NSBitmapImageRep(cgImage: cgi)
+    let jpegData = bitmapRep.representation(using: NSBitmapImageRep.FileType.jpeg,
+                                            properties: [:])!
+    return NSImage(data: jpegData)
+}
+
+extension CGImage {
+    func resize(width : Int, height : Int) -> CGImage? {
+        /// bytes_per_pixel = self.bitsPerPixel / self.bitsPerComponent
+        let bytes_per_row = width * bitsPerPixel / bitsPerComponent
+        
+        guard let color_space = colorSpace else { return nil }
+        guard let context = CGContext(data: nil,
+                                      width: width,
+                                      height: height,
+                                      bitsPerComponent: bitsPerComponent,
+                                      bytesPerRow: bytes_per_row,
+                                      space: color_space,
+                                      bitmapInfo: bitmapInfo.rawValue |
+                                                  alphaInfo.rawValue) else {
+            print("context")
+            return nil
+        }
+        
+        context.interpolationQuality = .high
+        context.draw(self, in: CGRect(x: 0, y: 0, width: width, height: height))
+        return context.makeImage()
+    }
+}
+
 extension NSImage {
     func resize(_ new_size : NSSize) -> NSImage? {
         let frame = NSRect(x: 0,

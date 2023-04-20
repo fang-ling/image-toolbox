@@ -54,8 +54,11 @@ public struct pxm {
                 if distance == 0 {
                     same.append(j)
                 } else if distance < 3 {
-                    //similar.append(j)
+                    similar.append(j)
                 }
+            }
+            if (same.isEmpty && similar.isEmpty) {
+                continue
             }
             print("""
                   Image: \(i)
