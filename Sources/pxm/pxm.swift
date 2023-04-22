@@ -38,10 +38,12 @@ public struct pxm {
             hashes[i] = phash(dct(matrix: cgImage.gray()!, block_size: 32))
         }
 
-        /* Compare */
+        /* Comparison */
         var same = [String]()
         var similar = [String]()
         var distance = 0
+        var results = Set<String>()
+        var result = ""
         for i in files {
             same.removeAll()
             similar.removeAll()
@@ -52,20 +54,20 @@ public struct pxm {
                 distance = hamming_distance(hashes[i]!, hashes[j]!)
                 if distance == 0 {
                     same.append(j)
-                } else if distance < 3 {
-//                    similar.append(j)
                 }
             }
             if (same.isEmpty && similar.isEmpty) {
                 continue
             }
-            print("open \(i)", terminator: "")
-            for j in same {
-                print(" \(j)", terminator: "")
+            result = "open"
+            same.append(i) /// Self is the same as self.
+            for j in same.sorted() {
+                result += " \(j)"
             }
-            print()
-                  //Similar images: \(similar)
-                  /*"""*/
+            results.insert(result)
+        }
+        for i in results {
+            print(i)
         }
     }
 }
