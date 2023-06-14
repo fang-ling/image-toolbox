@@ -1,5 +1,5 @@
 import Foundation
-import AppKit
+import txt
 
 @main
 public struct pxm {
@@ -13,29 +13,21 @@ public struct pxm {
         }
 
         /* Only hash images */
-        files = files.filter({
+        files = files.filter {
             $0.lowercased().hasSuffix(".jpg") ||
-            $0.lowercased().hasSuffix(".png") ||
-            $0.lowercased().hasSuffix(".jpeg")
-        })
+              $0.lowercased().hasSuffix(".heic") ||
+              $0.lowercased().hasSuffix(".webp") ||
+              $0.lowercased().hasSuffix(".png") ||
+              $0.lowercased().hasSuffix(".jpeg")
+        }
 
         /* Hash images */
-        var hashes : [String : String] = [:]
-        for i in files {
-            guard var nsImage = NSImage(contentsOfFile: i) else {
-                fatalError("Failed to read \(i)")
+        var hashes : [String : UInt64] = [:]
+        for file in files {
+            guard let rgba64 = Decoder.decode(from: file) else {
+                fatalError("Failed to decode image: \(file)")
             }
-            if i.lowercased().hasSuffix(".png") {
-                nsImage = png2jpg(png: nsImage)!
-            }
-            guard var cgImage = nsImage.cgImage(forProposedRect: nil,
-                                                context: nil,
-                                                hints: nil) else {
-                fatalError("Failed to convert \(i) from NSImage to CGImage")
-            }
-            cgImage = cgImage.resize(width: 32, height: 32)!
-
-            hashes[i] = phash(dct(matrix: cgImage.gray()!, block_size: 32))
+            hashes[file] = phash(rgba64)
         }
 
         /* Comparison */
@@ -54,17 +46,29 @@ public struct pxm {
                 distance = hamming_distance(hashes[i]!, hashes[j]!)
                 if distance == 0 {
                     same.append(j)
+                } else if distance <= 5 {
+                    similar.append(j)
                 }
             }
             if (same.isEmpty && similar.isEmpty) {
                 continue
             }
-            result = "open"
+            result = "Same: open"
             same.append(i) /// Self is the same as self.
-            for j in same.sorted() {
-                result += " \(j)"
+            if same.count > 1 {
+                for j in same.sorted() {
+                    result += " \(j)"
+                }
+                results.insert(result)
             }
-            results.insert(result)
+            result = "Similar: open"
+            similar.append(i)
+            if similar.count > 1 {
+                for j in similar.sorted() {
+                    result += " \(j)"
+                }
+                results.insert(result)
+            }
         }
         for i in results {
             print(i)
