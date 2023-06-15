@@ -57,7 +57,7 @@ public struct pxm {
             same.append(i) /// Self is the same as self.
             if same.count > 1 {
                 for j in same.sorted() {
-                    result += " \(j)"
+                    result += " \"\(j)\""
                 }
                 results.insert(result)
             }
@@ -65,7 +65,7 @@ public struct pxm {
             similar.append(i)
             if similar.count > 1 {
                 for j in similar.sorted() {
-                    result += " \(j)"
+                    result += " \"\(j)\""
                 }
                 results.insert(result)
             }
