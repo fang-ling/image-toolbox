@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
+      "identity" : "collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fang-ling/collections",
+      "state" : {
+        "revision" : "144af35fc70de8dafc443f0dcbe7ad877fdee27f",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "image-codec",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fang-ling/image-codec",
       "state" : {
-        "revision" : "419ff6edee0ddf24c96f187ef0cdd06c436d217b",
-        "version" : "0.0.5"
+        "revision" : "4a296132c2e483d73c5cb7aa781899ac05e3f369",
+        "version" : "0.0.6"
       }
     },
     {
