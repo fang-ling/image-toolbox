@@ -4,13 +4,18 @@ import PackageDescription
 
 let package = Package(
   name: "pxm",
+  platforms: [.macOS(.v10_15)],
   dependencies: [
     .package(url: "https://github.com/fang-ling/image-codec", from: "0.0.6"),
     .package(
       url: "https://github.com/fang-ling/image-transformation",
       from: "0.0.1"
     ),
-    .package(url: "https://github.com/fang-ling/collections", from: "0.0.2")
+    .package(url: "https://github.com/fang-ling/collections", from: "0.0.2"),
+    .package(
+      url: "https://github.com/apple/swift-argument-parser",
+      from: "1.2.2"
+    )
   ],
   targets: [
     .executableTarget(

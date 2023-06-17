@@ -2,8 +2,27 @@ import Foundation
 import txt
 import xhl
 
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
+
 @main
 public struct pxm {
+    static func calc_dct(_ files : [String]) async -> [String : UInt64] {
+        var hashes : [String : UInt64] = [:]
+        for file in files {
+            guard let rgba64 = Decoder.decode(from: file) else {
+                fatalError("Failed to decode image: \(file)")
+            }
+            hashes[file] = phash(rgba64)
+        }
+        return hashes
+    }
+
     public static func main() {
         /* List current working directory */
         var files : [String] = []
@@ -23,13 +42,26 @@ public struct pxm {
         }
 
         /* Hash images */
+        let jobs = 10
+        let files_chunked = files.chunked(into: jobs)
+        var hashes_chunked = [[String : UInt64]](repeating: [:], count: jobs)
+        Task {
+            for i in 0 ..< jobs {
+                hashes_chunked[i] = await calc_dct(files_chunked[i])
+            }
+        }
         var hashes : [String : UInt64] = [:]
+        for i in hashes_chunked {
+            hashes.merge(i) { (_, new) in new }
+        }
+
+        /*var hashes : [String : UInt64] = [:]
         for file in files {
             guard let rgba64 = Decoder.decode(from: file) else {
                 fatalError("Failed to decode image: \(file)")
             }
             hashes[file] = phash(rgba64)
-        }
+        }*/
 
         /* Comparison */
         var same = UnionFindSet<String>()
