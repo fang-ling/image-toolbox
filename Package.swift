@@ -4,9 +4,8 @@ import PackageDescription
 
 let package = Package(
   name: "pxm",
-  platforms: [.macOS(.v10_15)],
   dependencies: [
-    .package(url: "https://github.com/fang-ling/image-codec", from: "0.0.6"),
+    .package(url: "https://github.com/fang-ling/image-codec", from: "0.0.11"),
     .package(
       url: "https://github.com/fang-ling/image-transformation",
       from: "0.0.1"
@@ -23,7 +22,8 @@ let package = Package(
       dependencies: [
         .product(name: "txt", package: "image-codec"),
         .product(name: "lml", package: "image-transformation"),
-        .product(name: "xhl", package: "collections")
+        .product(name: "xhl", package: "collections"),
+        .product(name: "ArgumentParser", package: "swift-argument-parser")
       ]),
     .testTarget(
       name: "pxmTests",
