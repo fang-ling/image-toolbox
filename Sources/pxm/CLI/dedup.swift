@@ -7,7 +7,7 @@
 
 import ArgumentParser
 import Foundation
-import txt
+import ImageCodec
 import xhl
 
 extension pxm {

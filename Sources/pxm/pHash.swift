@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import txt
-import lml
+import ImageIntermedia
+import ImageTransformation
 
 func phash(_ rgba64 : RGBA64) -> UInt64 {
     var hash : UInt64 = 0
