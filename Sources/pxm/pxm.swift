@@ -1,6 +1,6 @@
 import ArgumentParser
 
-let VERSION = "0.0.1"
+let VERSION = "0.0.2"
 
 @main
 struct pxm : ParsableCommand {
