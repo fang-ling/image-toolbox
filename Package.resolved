@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fang-ling/collections",
       "state" : {
-        "revision" : "144af35fc70de8dafc443f0dcbe7ad877fdee27f",
-        "version" : "0.0.2"
+        "revision" : "bdf6edc208fa4a97cf59eea25c1e9d2269ab71f4",
+        "version" : "0.0.8"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fang-ling/image-codec",
       "state" : {
-        "revision" : "4748f17738bd38b8367e6ebbb509184e58521ecb",
-        "version" : "0.0.12"
+        "revision" : "7501b7566d62595172701c9d38d296622875be13",
+        "version" : "0.0.14"
       }
     },
     {
@@ -43,15 +43,6 @@
       "state" : {
         "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
         "version" : "1.2.2"
-      }
-    },
-    {
-      "identity" : "swift-png",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tayloraswift/swift-png",
-      "state" : {
-        "revision" : "075dfb248ae327822635370e9d4f94a5d3fe93b2",
-        "version" : "4.0.2"
       }
     }
   ],

@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import ImageIntermedia
-import ImageTransformation
+//import ImageIntermedia
+//import ImageTransformation
 
-func phash(_ rgba64 : RGBA64) -> UInt64 {
+/*func phash(_ rgba64 : RGBA64) -> UInt64 {
     var hash : UInt64 = 0
 
     /* 1. reduce size */
@@ -39,7 +39,7 @@ func phash(_ rgba64 : RGBA64) -> UInt64 {
     }
 
     return hash
-}
+}*/
 
 func hamming_distance(_ lhs : UInt64, _ rhs : UInt64) -> Int {
     var xor = lhs ^ rhs

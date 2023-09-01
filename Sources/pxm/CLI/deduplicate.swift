@@ -1,5 +1,5 @@
 //
-//  dedup.swift
+//  deduplicate.swift
 //
 //
 //  Created by Fang Ling on 2023/6/21.
@@ -8,16 +8,16 @@
 import ArgumentParser
 import Foundation
 import ImageCodec
-import xhl
+import Collections
 
 extension pxm {
-    struct Dedup : ParsableCommand {
+    struct deduplicate : ParsableCommand {
         static var configuration = CommandConfiguration(
           abstract: "Find exact and near duplicates in an image collection."
         )
 
         func run() throws {
-            /* List current working directory */
+            /*/* List current working directory */
             var files = try FileManager.default.contentsOfDirectory(atPath: ".")
 
             /* Only hash images */
@@ -85,7 +85,8 @@ extension pxm {
                         )
                     }
                 }
+            }*/
             }
-        }
+
     }
 }

@@ -9,6 +9,6 @@ struct pxm : ParsableCommand {
         "A utility for displaying, converting, " +
         "and editing raster image files.",
       version: VERSION,
-      subcommands: [Dedup.self]
+      subcommands: [convert.self, deduplicate.self]
     )
 }
