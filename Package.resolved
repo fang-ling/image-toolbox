@@ -14,26 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fang-ling/image-codec",
       "state" : {
-        "revision" : "7501b7566d62595172701c9d38d296622875be13",
-        "version" : "0.0.14"
-      }
-    },
-    {
-      "identity" : "image-intermedia",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fang-ling/image-intermedia",
-      "state" : {
-        "revision" : "a4fde248d9ea4b6589d069812f45c5ec50d03b73",
-        "version" : "0.0.1"
-      }
-    },
-    {
-      "identity" : "image-transformation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fang-ling/image-transformation",
-      "state" : {
-        "revision" : "ee746ef3b4672d09b4a7360a6c29250926b3b821",
-        "version" : "0.0.3"
+        "revision" : "7713e8194e08dc5d822791c732920ace3c552dac",
+        "version" : "0.0.20"
       }
     },
     {

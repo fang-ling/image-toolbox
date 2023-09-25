@@ -6,14 +6,19 @@
 //
 
 import Foundation
-//import ImageIntermedia
-//import ImageTransformation
+import ImageCodec
+/*import ImageTransformation
 
-/*func phash(_ rgba64 : RGBA64) -> UInt64 {
+func phash(pixels : [UInt16], metadata : ImageMetadata) -> UInt64 {
     var hash : UInt64 = 0
 
     /* 1. reduce size */
-    let resized = Resizer.bilinear_interpolation(rgba64, width: 32, height: 32)
+    let (r_pixels, r_metadata) = bilinear_interpolation(
+      pixels: pixels,
+      metadata: metadata,
+      width: 32,
+      height: 32
+    )
     /* 2. reduce color */
     let gray = Grayscale16(rgba64: resized)
     /* 3. compute the DCT */
